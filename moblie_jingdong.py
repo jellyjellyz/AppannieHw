@@ -22,8 +22,8 @@ cookies = {'cookies_are':
 # CACHE_FNAME = 'page_cache.json'  #cache0
 # CACHE_FNAME = 'page_cache1.json'   #cache1
 # CACHE_FNAME = 'page_cache2.json'   #cache2
-CACHE_FNAME = 'page_cache3.json'   #cache3
-# CACHE_FNAME = 'page_cache3.json'   #cache4
+# CACHE_FNAME = 'page_cache3.json'   #cache3
+CACHE_FNAME = 'page_cache4.json'   #cache4
 
 
 
@@ -179,17 +179,19 @@ def get_mobile_data(phone_obj):
             theinfo = re.findall(r'\uff1a(.*)$', info.text)[0]
             # print(theinfo)
             if '名称' in info.text:
-                if '壳' in info.text or '贴膜' in info.text or '线' in info.text or '头' in info.text \
-                    or '耳机' in info.text or '电源' in info.text or '套' in info.text or '优盘' in info.text \
-                    or '电池' in info.text or '器' in info.text or '卡' in info.text or '表' in info.text:
+                if '壳' in info.text or '贴膜' in info.text or '线' in info.text or '头' in info.text or '机膜' in info.text \
+                    or '耳机' in info.text or '电源' in info.text or '套' in info.text or '优盘' in info.text or '座' in info.text \
+                    or '电池' in info.text or '器' in info.text or '表' in info.text or '笔' in info.text \
+                    or '脑' in info.text or '环' in info.text or '相机' in info.text or '坞' in info.text \
+                    or '钢化膜' in info.text or '补差链接' in info.text:
                     print('NOT a phone, {}'. format(info.text))
                     return False
                 else:
                     phone_obj.name = theinfo
-            elif '类别' in info.text:
-                if '耳机' in info.text or '其他' in info.text or '组套' in info.tex:
-                    print('NOT a phone, {}'. format(info.text)) 
-                    return False
+            # elif '类别' in info.text:
+            #     if '耳机' in info.text or '其他' in info.text or '组套' in info.tex:
+            #         print('NOT a phone, {}'. format(info.text)) 
+            #         return False
             elif '前置摄像头' in info.text:
                 phone_obj.camera_frot = theinfo
             elif '后置摄像头' and '后' in info.text:
@@ -212,8 +214,8 @@ def get_mobile_data(phone_obj):
 # for p_num in range(1,20)[::2]:    #cach0
 # for p_num in range(21,40)[::2]:   #cach1
 # for p_num in range(41,60)[::2]:   #cach2 
-for p_num in range(61,80)[::2]:   #cach3
-# for p_num in range(81,96)[::2]:   #cach4
+# for p_num in range(61,80)[::2]:   #cach3
+for p_num in range(81,96)[::2]:   #cach4
     thepage = Page(p_num)
     phones = thepage.get_full_info()
     # print(len(phones))
@@ -232,10 +234,10 @@ for p_num in range(61,80)[::2]:   #cach3
 
         print(aphone)
         print('-'*20)
-        # with open('sumsung.csv', 'a+', encoding='utf-8-sig') as csvfile:
-        #     filewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-        #     filewriter.writerow([aphone.name, aphone.price, aphone.storage, \
-        #                         aphone.battery, aphone.color, aphone.camera_frot, aphone.camera_back, aphone.detailurl])
+        with open('sumsung.csv', 'a+', encoding='utf-8-sig') as csvfile:
+            filewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+            filewriter.writerow([aphone.name, aphone.price, aphone.storage, \
+                                aphone.battery, aphone.color, aphone.camera_frot, aphone.camera_back, aphone.detailurl])
 
 # -------- END MAIN scraping --------
 
